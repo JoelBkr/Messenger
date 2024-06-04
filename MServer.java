@@ -1,9 +1,9 @@
 import java.net.*;
 
 /**
- * Klasse fuer einen SpielServer. Der Spielserver bietet die Möglickeit ein Spiel gegen den Server zu spielen. Bei dem Spiel muss man eine zufällige Zahl
+ * Klasse fuer einen SpielServer. Der Spielserver bietet die Moeglickeit ein Spiel gegen den Server zu spielen. Bei dem Spiel muss man eine zufï¿½llige Zahl
  * zwischen 
- * @author Henning Ainödhofer
+ * @author Henning Ainoedhofer
  * @version 21.03.2017
  */
 
@@ -83,7 +83,7 @@ public class MServer extends Server {
                 }
             case "END":
                 {
-                    this.send(pClientIP, pClientPort, "END Tschüss");
+                    this.send(pClientIP, pClientPort, "END Tschï¿½ss");
                     closeConnection(pClientIP, pClientPort);
                     break;
                 }
@@ -115,7 +115,7 @@ public class MServer extends Server {
     }
 
     /**
-     * Diese Methode gibt den Befehl zurück die die message beinhaltet
+     * Diese Methode gibt den Befehl zurï¿½ck die die message beinhaltet
      * 
      * @param message
      * 
@@ -127,7 +127,7 @@ public class MServer extends Server {
     }
 
     /**
-     * Diese Methode gibt den Text zurück die die message beinhaltet
+     * Diese Methode gibt den Text zurï¿½ck die die message beinhaltet
      * 
      * @param message
      * 

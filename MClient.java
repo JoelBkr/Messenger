@@ -1,7 +1,7 @@
 import javax.swing.*;
 /**
  * Klasse fuer einen SpielClient
- * @author Henning Ainödhofer
+ * @author Henning Ainoedhofer
  * @version 21.3.2017
  */
 
@@ -75,7 +75,7 @@ public class MClient extends Client {
     }
 
     /**
-     * Diese Methode gibt den Befehl zurück die die message beinhaltet
+     * Diese Methode gibt den Befehl zurï¿½ck die die message beinhaltet
      * 
      * @param message
      * 
@@ -87,7 +87,7 @@ public class MClient extends Client {
     }
 
     /**
-     * Diese Methode gibt den Text zurück die die message beinhaltet
+     * Diese Methode gibt den Text zurï¿½ck die die message beinhaltet
      * 
      * @param message
      * 
