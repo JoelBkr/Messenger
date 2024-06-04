@@ -8,26 +8,24 @@
 public class Nachricht
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int x;
+    private String inhalt;
 
     /**
      * Konstruktor fuer Objekte der Klasse Nachricht
      */
-    public Nachricht()
+    public Nachricht(String inhalt)
     {
-        // Instanzvariable initialisieren
-        x = 0;
+        this.inhalt = inhalt;
     }
 
     /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
-     * 
-     * @param  y    ein Beispielparameter fuer eine Methode
-     * @return        die Summe aus x und y
+     * Diese Methode gibt den Inhalt einer Nachricht zurück
+     * @author:
+     * @version:  04.06.2024
+     * @return: Inhalt der Nachricht
      */
-    public int beispielMethode(int y)
+    public String gibInhalt()
     {
-        // tragen Sie hier den Code ein
-        return x + y;
+        return inhalt;
     }
 }
