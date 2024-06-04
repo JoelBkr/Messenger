@@ -16,62 +16,7 @@ public class MClient extends Client {
      */
 
     public void processMessage(String message){
-        switch(gibBefehlsbereich(message))
-        {
-            case "+OK":
-            {
-                System.out.println(gibTextbereich(message));
-                break;
-            }
-            
-            case "FLS":
-            {
-                System.out.println(gibTextbereich(message));
-                break;
-            }
-            
-            case "TRU":
-            {
-                System.out.println(gibTextbereich(message));
-                break;
-            }
-                
-            case "GHC":
-            {
-                System.out.println(message);
-                break;
-            }
-            
-            case "END":
-            {
-                System.out.println(gibTextbereich(message));    
-                break;
-            }
-            
-            case "-E1":
-            {
-                System.out.println(gibTextbereich(message));
-                break;
-            }
-            
-            case "-E2":
-            {
-                System.out.println(gibTextbereich(message));
-                break;
-            }
-            
-            case "-E3":
-            {
-                System.out.println(gibTextbereich(message));
-                break;
-            }
-            
-            default:
-            {
-                System.out.println("Befehl falsch. Bitte richtigen Befehl eintippen.");
-                break;
-            }
-        }
+        
     }
 
     /**

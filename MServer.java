@@ -34,67 +34,7 @@ public class MServer extends Server {
      * Hier wird die Fallunterscheidung behandelt, die im Protokoll festgelegt wurde.
      */
     public void processMessage(String pClientIP, int pClientPort, String pMessage){ 
-        switch(gibBereich(pMessage,0))
-        {
-                //Hier muss das Protokoll umgesetzt werden
-            case "STR":
-                {
-                    if(gibBereich(pMessage,1) != "")
-                    {
-                        spieleOnline.append(new Spiel(pClientIP, pClientPort, gibZufallszahl(), gibBereich(pMessage,1))); 
-                        this.send(pClientIP, pClientPort, "+OK Willkommen " + gibBereich(pMessage,1) + ", errate meine Zahl");
-                    }
-                    else
-                    {
-                        this.send(pClientIP, pClientPort, "-E1 Name fehlt");
-                    }
-                    break;
-                }
-            case "RAT":
-                {
-                    if(gibBereich(pMessage,1) != "")
-                    {
-                        int zahl = Integer.parseInt(gibBereich(pMessage,1));
-                        if(zahl == gibZahlVonSpiel(pClientIP))
-                        {
-                            this.send(pClientIP, pClientPort, "TRU Die Zahl war richtig");
-                            this.DBhighscore.hinzufuegen(gibNameVonSpiel(pClientIP), gibVersucheVonSpiel(pClientIP));
-                        }
-                        else if(zahl > 20 || zahl < 0)
-                        {
-                            this.send(pClientIP, pClientPort, " -E2 Die Zahl liegt nicht zwischen 0 und 20");
-                        }
-                        else
-                        {
-                            this.send(pClientIP, pClientPort, "FLS Die zahl war leider falsch");
-                        }
-                        versucheErhoehenVonSpiel(pClientIP);
-                    }
-                    else
-                    {
-                        this.send(pClientIP, pClientPort, "-E3 Keine Zahl");
-                    }
-                    break; 
-                }
-            case "GHC":
-                {
-                    this.send(pClientIP, pClientPort, "GHC " + this.generiereStringAusList(DBhighscore.holeZehn()));
-                    break;
-                }
-            case "END":
-                {
-                    this.send(pClientIP, pClientPort, "END Tsch�ss");
-                    closeConnection(pClientIP, pClientPort);
-                    break;
-                }
-
-            default:
-                {
-                    this.send(pClientIP, pClientPort, "-E0 Falsche Angaben"); 
-                    break;
-                }
-        }
-
+        
     }
 
     /**
@@ -151,5 +91,60 @@ public class MServer extends Server {
     private String wortAn(String message, int stelle){
         String ergebnis = "";
         return ergebnis;
+    }
+    
+    /**
+     * Diese Methode holt den Nachrichtenverlauf aus der Datenbank.
+     * @author
+     * @return ergebnis mit Nachrichtenverlauf
+     * @version 04.06.24
+     */
+    public List<Nachricht> holeNachrichtenAusDB() {
+        List<Nachricht> ergebnis = null;
+        return ergebnis;
+    }
+    
+    /**
+     * Diese Methode schaut in der DB ob dieser Benutzername schon einmal angemeldet war.
+     * @author
+     * @param name der Benutzername
+     * return boolean ob er schon existiert
+     * @version 04.06.24
+     */
+    public boolean existiertBenutzer(String name) {
+        return false;
+    }
+    
+    /**
+     * Diese Methode schaut in der DB ob das Passort von diesem Benutzername richtig ist.
+     * @author
+     * @param name der Benutzername
+     * @param passwort das Passwort
+     * return boolean ob es richtig ist
+     * @version 04.06.24
+     */
+    public boolean hatBenutzerRichtigesPasswort(String name, String passwort) {
+        return false;
+    }
+
+    /**
+     * Vielleicht nicht mehr notwendig
+     * @author
+     * @param name der Benutzername
+     * @version 04.06.24
+     */
+    public boolean eintragErstellen(String name) {
+        return false;
+    }
+    
+    /**
+     * Diese Methode legt einen neuen Benutzer in der DB an.
+     * @author
+     * @param name der Benutzername
+     * @param passwort das Passwort
+     * @version 04.06.24
+     */
+    public boolean neuerBenutzer(String name, String passwort) {
+        return false;
     }
 }
