@@ -1,33 +1,115 @@
-
+import javax.swing.*;
 /**
- * Beschreiben Sie hier die Klasse mClient.
- * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * Klasse fuer einen SpielClient
+ * @author Henning Ainödhofer
+ * @version 21.3.2017
  */
-public class MClient
-{
-    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int x;
 
-    /**
-     * Konstruktor fuer Objekte der Klasse mClient
-     */
-    public MClient()
-    {
-        // Instanzvariable initialisieren
-        x = 0;
+public class MClient extends Client { 
+    public MClient(String ip, int p) {
+        super(ip, p);
     }
 
     /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
-     * 
-     * @param  y    ein Beispielparameter fuer eine Methode
-     * @return        die Summe aus x und y
+     * Diese Methode der Server-Klasse wird hiermit ueberschrieben.
+     * Der Client gibt die erhaltende Meldung, auf dem Textfeld aus.
      */
-    public int beispielMethode(int y)
+
+    public void processMessage(String message){
+        switch(gibBefehlsbereich(message))
+        {
+            case "+OK":
+            {
+                System.out.println(gibTextbereich(message));
+                break;
+            }
+            
+            case "FLS":
+            {
+                System.out.println(gibTextbereich(message));
+                break;
+            }
+            
+            case "TRU":
+            {
+                System.out.println(gibTextbereich(message));
+                break;
+            }
+                
+            case "GHC":
+            {
+                System.out.println(message);
+                break;
+            }
+            
+            case "END":
+            {
+                System.out.println(gibTextbereich(message));    
+                break;
+            }
+            
+            case "-E1":
+            {
+                System.out.println(gibTextbereich(message));
+                break;
+            }
+            
+            case "-E2":
+            {
+                System.out.println(gibTextbereich(message));
+                break;
+            }
+            
+            case "-E3":
+            {
+                System.out.println(gibTextbereich(message));
+                break;
+            }
+            
+            default:
+            {
+                System.out.println("Befehl falsch. Bitte richtigen Befehl eintippen.");
+                break;
+            }
+        }
+    }
+
+    /**
+     * Diese Methode gibt den Befehl zurück die die message beinhaltet
+     * 
+     * @param message
+     * 
+     * @return Befehl
+     */
+    private String gibBefehlsbereich(String message)
     {
-        // tragen Sie hier den Code ein
-        return x + y;
+        return message.split(" ")[0];
+    }
+
+    /**
+     * Diese Methode gibt den Text zurück die die message beinhaltet
+     * 
+     * @param message
+     * 
+     * @return Text
+     */
+    private String gibTextbereich(String message)
+    {
+        String [] messageArray = message.split(" ");
+        String text = "";
+        for(int i = 1; i < messageArray.length; i++)
+        {
+            text = text+" "+ messageArray[i];
+        }
+        return text;
+    }
+
+    /**
+     * Diese Methode druckt die Higscoreliste auf der Konsole aus.
+     * @param message
+     */
+    private String wortAn(String message, int stelle){
+        String ergebnis = "";
+        return ergebnis;
     }
 }
