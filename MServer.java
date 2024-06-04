@@ -27,14 +27,26 @@ public class MServer extends Server {
      */
 
     public void processNewConnection(String pClientIP, int pClientPort){
-        this.send(pClientIP, pClientPort, "+OK Verbindung hergestellt");
+        this.send(pClientIP, pClientPort, "CON erfolgreich");
     }
 
     /**
      * Hier wird die Fallunterscheidung behandelt, die im Protokoll festgelegt wurde.
      */
     public void processMessage(String pClientIP, int pClientPort, String pMessage){ 
-        
+
+        switch(wortAn(pMessage, 0)) {
+            case "USR": {
+                String name = wortAn(pMessage, 1);
+                String passwort = wortAn(pMessage, 2);
+                
+                if(existiertBenutzer(name)) {
+                    if(hatBenutzerRichtigesPasswort(name, passwort)) {
+                        
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -42,7 +54,7 @@ public class MServer extends Server {
      * Die Verbindung wird beendet und aus der Liste der Clients gestrichen.
      */
     public void processClosingConnection(String pClientIP, int pClientPort){
-        this.send(pClientIP, pClientPort, "EXT complete");
+        this.send(pClientIP, pClientPort, "QUT erfolgreich");
         this.closeConnection(pClientIP, pClientPort);
     }
 
