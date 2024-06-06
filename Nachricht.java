@@ -9,12 +9,14 @@ public class Nachricht
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private String inhalt;
+    private String absender;
     /**
      * Konstruktor fuer Objekte der Klasse Nachricht
      */
-    public Nachricht(String inhalt)
+    public Nachricht(String inhalt, String absender)
     {
         this.inhalt = inhalt;
+        this.absender = absender;
     }
 
     /**

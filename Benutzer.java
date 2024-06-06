@@ -15,7 +15,7 @@ public class Benutzer
     /**
      * Konstruktor fuer Objekte der Klasse benutzer
      */
-    public Benutzer(String name, String passwort, boolean angemeldet, int bID)
+    public Benutzer(String name, String passwort, boolean angemeldet)
     {
         this.name = name;
         this.passwort = passwort;
@@ -88,8 +88,5 @@ public class Benutzer
     {
         this.angemeldet = angemeldet;
     }
-    public int gibBenutzerID()
-    {
-        
-    }
+
 }

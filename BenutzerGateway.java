@@ -9,7 +9,7 @@ public class BenutzerGateway
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private DatabaseConnector db;
-    private List<Benutzer> bList;
+    
 
     /**
      * Konstruktor für Objekte der Klasse HighscoreGateway
@@ -28,7 +28,19 @@ public class BenutzerGateway
 
     public List gibBenutzerListe()
     {
-        return bList;
+        verbinde();
+        List <Benutzer> b = new List();
+        db.executeStatement("Select * from benutzer");
+        QueryResult ergebnis = db.getCurrentQueryResult();
+        if(ergebnis != null)
+        {
+            for(int i = 0; i < ergebnis.getRowCount(); i++)
+            {
+                b.append(new Benutzer(ergebnis.getData()[i][0], ergebnis.getData()[i][1], true));
+            }
+        }
+        beende();
+        return b;
     }
     /**
      * Diese Methode fügt der Datenbank einen neuen Benutzer hinzu
@@ -39,8 +51,6 @@ public class BenutzerGateway
      */
     public void neuerBenutzer(String name, String passwort)
     {
-        Benutzer neu = new Benutzer(name, passwort, true);
-        bList.append(neu);
         verbinde();
         db.executeStatement("INSERT INTO benutzer (name, passwort, status) VALUES ('"+name+"', '"+passwort+"', ");
         beende();
@@ -51,7 +61,7 @@ public class BenutzerGateway
     public void erzeugeTabelle()
     {
          verbinde();
-         db.executeStatement("Create table if not exists benutzer (id INTEGER PRIMARY KEY AUTOINCREMENT, name text, passwort text, status boolean)");
+         db.executeStatement("Create table if not exists benutzer (name text PRIMARY KEY, passwort text, status boolean)");
          beende();
     }
     
@@ -62,7 +72,7 @@ public class BenutzerGateway
     {
         if(db == null)
         {
-            db = new DatabaseConnector("",0,"BenutzerDB","","");
+            db = new DatabaseConnector("",0,"DB","","");
         }
     }
     

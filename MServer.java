@@ -16,8 +16,10 @@ public class MServer extends Server {
     public MServer(int p) {
         super(p);
         bGateway = new BenutzerGateway();
+        bGateway.erzeugeTabelle();
         bList = new List<Benutzer>();
         vGateway = new VerlaufGateway();
+        vGateway.erzeugeTabelle();
         nList = new List<Nachricht>();
     }
 
