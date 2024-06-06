@@ -170,6 +170,6 @@ public class MServer extends Server {
      * @version 04.06.24
      */
     public void neuerBenutzer(String name, String passwort) {
-        
+        bGateway.neuerBenutzer(name, passwort);
     }
 }
