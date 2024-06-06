@@ -36,16 +36,28 @@ public class MServer extends Server {
     public void processMessage(String pClientIP, int pClientPort, String pMessage){ 
 
         switch(wortAn(pMessage, 0)) {
-            case "USR": {
+               case "USR": {
                 String name = wortAn(pMessage, 1);
                 String passwort = wortAn(pMessage, 2);
                 
                 if(existiertBenutzer(name)) {
-                    if(hatBenutzerRichtigesPasswort(name, passwort)) 
-                    {
-                        
+                    if(hatBenutzerRichtigesPasswort(name, passwort)) {
+                        system.out.println("USR willkommen");
+                    }
+                    else {
+                        system.out.println("E01 falsche Anmeldedaten");
                     }
                 }
+                else {
+                        system.out.println("E01 falsche Anmeldedaten");
+                    }
+            }
+
+            case "REG": {
+                String name = wortAn(pMessage, 1);
+                String passwort = wortAn(pMessage, 2);
+
+                neuerBenutzer(name, passwort);
             }
         }
     }
@@ -157,7 +169,7 @@ public class MServer extends Server {
      * @param passwort das Passwort
      * @version 04.06.24
      */
-    public boolean neuerBenutzer(String name, String passwort) {
-        return false;
+    public void neuerBenutzer(String name, String passwort) {
+        
     }
 }
