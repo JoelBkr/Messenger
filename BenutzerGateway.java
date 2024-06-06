@@ -30,4 +30,51 @@ public class BenutzerGateway
     {
         return bList;
     }
+    /**
+     * Diese Methode fügt der Datenbank einen neuen Benutzer hinzu
+     * 
+     * @author:
+     * @version: 06.06.2024
+     * @param: Neuer Benutzer
+     */
+    public void neuerBenutzer(String name, String passwort)
+    {
+        Benutzer neu = new Benutzer(name, passwort, true);
+        bList.append(neu);
+        verbinde();
+        db.executeStatement("INSERT INTO benutzer (name, passwort, status) VALUES ('"+name+"', '"+passwort+"', ");
+        beende();
+    }
+     /**
+     * Diese Methode erzeugt die Tabelle highscore, wenn diese nicht schon exisitiert.
+     */
+    public void erzeugeTabelle()
+    {
+         verbinde();
+         db.executeStatement("Create table if not exists benutzer (id INTEGER PRIMARY KEY AUTOINCREMENT, name text, passwort text, status boolean)");
+         beende();
+    }
+    
+    /**
+     * Diese Methode stellt eine Verbindung zur Datenbank her.
+     */
+    private void verbinde()
+    {
+        if(db == null)
+        {
+            db = new DatabaseConnector("",0,"BenutzerDB","","");
+        }
+    }
+    
+    /**
+     * Diese Methode beendet die Verbindung zur Datenbank.
+     */
+    private void beende()
+    {
+        if(db != null)
+        {
+            db.close();
+            db = null;
+        }
+    }
 }

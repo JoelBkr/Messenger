@@ -9,7 +9,6 @@ public class Nachricht
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private String inhalt;
-
     /**
      * Konstruktor fuer Objekte der Klasse Nachricht
      */

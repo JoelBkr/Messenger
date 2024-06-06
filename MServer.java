@@ -41,7 +41,8 @@ public class MServer extends Server {
                 String passwort = wortAn(pMessage, 2);
                 
                 if(existiertBenutzer(name)) {
-                    if(hatBenutzerRichtigesPasswort(name, passwort)) {
+                    if(hatBenutzerRichtigesPasswort(name, passwort)) 
+                    {
                         
                     }
                 }
@@ -67,7 +68,7 @@ public class MServer extends Server {
     }
 
     /**
-     * Diese Methode gibt den Befehl zur�ck die die message beinhaltet
+     * Diese Methode gibt den Befehl zurueck die die message beinhaltet
      * 
      * @param message
      * 
@@ -79,7 +80,7 @@ public class MServer extends Server {
     }
 
     /**
-     * Diese Methode gibt den Text zur�ck die die message beinhaltet
+     * Diese Methode gibt den Text zurueck die die message beinhaltet
      * 
      * @param message
      * 

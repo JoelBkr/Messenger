@@ -10,15 +10,17 @@ public class Benutzer
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private String name, passwort;
     private boolean angemeldet;
+    private int bID;
 
     /**
      * Konstruktor fuer Objekte der Klasse benutzer
      */
-    public Benutzer(String name, String passwort, boolean angemeldet)
+    public Benutzer(String name, String passwort, boolean angemeldet, int bID)
     {
         this.name = name;
         this.passwort = passwort;
         this.angemeldet = angemeldet;
+        this.bID = bID;
     }
 
     /**
@@ -85,5 +87,9 @@ public class Benutzer
     public void setzeAngemeldet(boolean angemeldet)
     {
         this.angemeldet = angemeldet;
+    }
+    public int gibBenutzerID()
+    {
+        
     }
 }
