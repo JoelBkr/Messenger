@@ -6,8 +6,10 @@ import javax.swing.*;
  */
 
 public class MClient extends Client { 
+    String ip;
     public MClient(String ip, int p) {
         super(ip, p);
+        this.ip = ip;
     }
 
     /**
@@ -114,5 +116,9 @@ public class MClient extends Client {
            System.out.println(vArray[i]);
            System.out.println("-----");
        }
+    }
+    public String gibIP()
+    {
+        return ip;
     }
 }
