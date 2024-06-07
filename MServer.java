@@ -71,9 +71,11 @@ public class MServer extends Server {
 
             case "MES": {
                 String inhalt = gibTextbereich();
+                String name = "";
 
                 if(inhalt.isEmpty == false) {
                     sytsem.out.println("MES Nachricht erhalten");
+                    vGateway.neueNachricht(inhalt, name);
                 } else {
                     sytsem.out.println("E03 Nachricht leer");
                 }
