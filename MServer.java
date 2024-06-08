@@ -74,8 +74,8 @@ public class MServer extends Server {
                 String name = "";
 
                 if(inhalt.isEmpty == false) {
-                    this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
                     vGateway.neueNachricht(inhalt, name);
+                    this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
                 } else {
                     this.send(pClientIP, pClientPort, "E03 Nachricht leer");
                 }
@@ -131,8 +131,10 @@ public class MServer extends Server {
     }
 
     /**
-     * Diese Methode druckt die Higscoreliste auf der Konsole aus.
+     * Gibt das Wort an der übergebenen Stelle.
      * @param message
+     * @param stelle
+     * @return ergebnis welches Wort an der Stelle steht
      */
     private String wortAn(String message, int stelle){
         String ergebnis = "";
@@ -146,7 +148,7 @@ public class MServer extends Server {
      * @version 04.06.24
      */
     public List<Nachricht> holeNachrichtenAusDB() {
-        List<Nachricht> ergebnis = null;
+        List<Nachricht> ergebnis = vGateway.gibVerlaufListe();
         return ergebnis;
     }
     
@@ -158,6 +160,16 @@ public class MServer extends Server {
      * @version 04.06.24
      */
     public boolean existiertBenutzer(String name) {
+        List<Benutzer> liste = bGateway.gibBenutzerListe();
+
+        liste.toFirst();
+        while(liste.hasAccess()) {
+            if (liste.getContent().gibName().equals(name)) {
+                return true;
+            } else {
+                liste.next();
+            }
+        }
         return false;
     }
     
@@ -170,16 +182,18 @@ public class MServer extends Server {
      * @version 04.06.24
      */
     public boolean hatBenutzerRichtigesPasswort(String name, String passwort) {
-        return false;
-    }
+        List<Benutzer> liste = bGateway.gibBenutzerListe();
 
-    /**
-     * Vielleicht nicht mehr notwendig
-     * @author
-     * @param name der Benutzername
-     * @version 04.06.24
-     */
-    public boolean eintragErstellen(String name) {
+        liste.toFirst();
+        while(liste.hasAccess()) {
+            if (liste.getContent().gibName().equals(name)) {
+                if (liste.getContent().gibPasswort().equals(passwort)) {
+                    return true;
+                }
+            } else {
+                liste.next();
+            }
+        }
         return false;
     }
     
