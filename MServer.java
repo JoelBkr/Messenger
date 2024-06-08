@@ -1,8 +1,10 @@
 import java.net.*;
 
 /**
- * Klasse fuer einen SpielServer. Der Spielserver bietet die Moeglickeit ein Spiel gegen den Server zu spielen. Bei dem Spiel muss man eine zuf�llige Zahl
- * zwischen 
+ * Klasse fuer einen SpielServer. Der Spielserver bietet die Moeglickeit ein
+ * Spiel gegen den Server zu spielen. Bei dem Spiel muss man eine zuf�llige Zahl
+ * zwischen
+ * 
  * @author Henning Ainoedhofer
  * @version 21.03.2017
  */
@@ -13,6 +15,7 @@ public class MServer extends Server {
     private List<Benutzer> bList;
     private VerlaufGateway vGateway;
     private List<Nachricht> nList;
+
     public MServer(int p) {
         super(p);
         bGateway = new BenutzerGateway();
@@ -28,42 +31,41 @@ public class MServer extends Server {
      * Der angemeldete Client bekommt die Meldung, dass er angenommen wurde.
      */
 
-    public void processNewConnection(String pClientIP, int pClientPort){
+    public void processNewConnection(String pClientIP, int pClientPort) {
         this.send(pClientIP, pClientPort, "CON erfolgreich");
     }
 
     /**
-     * Hier wird die Fallunterscheidung behandelt, die im Protokoll festgelegt wurde.
+     * Hier wird die Fallunterscheidung behandelt, die im Protokoll festgelegt
+     * wurde.
      */
-    public void processMessage(String pClientIP, int pClientPort, String pMessage){ 
+    public void processMessage(String pClientIP, int pClientPort, String pMessage) {
 
-        switch(wortAn(pMessage, 0)) {
-               case "USR": {
+        switch (wortAn(pMessage, 0)) {
+            case "USR": {
                 String name = wortAn(pMessage, 1);
                 String passwort = wortAn(pMessage, 2);
-                
-                if(existiertBenutzer(name)) {
-                    if(hatBenutzerRichtigesPasswort(name, passwort)) {
+
+                if (existiertBenutzer(name)) {
+                    if (hatBenutzerRichtigesPasswort(name, passwort)) {
                         system.out.println(pClientIP, pClientPort, "USR willkommen");
                         this.send(pClientIP, pClientPort, vGateway.gibVerlaufListe());
-                    }
-                    else {
+                    } else {
                         this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
                     }
+                } else {
+                    this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
                 }
-                else {
-                        this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
-                    }
             }
 
             case "REG": {
                 String name = wortAn(pMessage, 1);
                 String passwort = wortAn(pMessage, 2);
 
-                if(existiertBenutzer(name) == false) {
+                if (existiertBenutzer(name) == false) {
                     neuerBenutzer(name, passwort);
-                this.send(pClientIP, pClientPort, "REG erfolgreich");
-                this.send(pClientIP, pClientPort, vGateway.gibVerlaufListe());
+                    this.send(pClientIP, pClientPort, "REG erfolgreich");
+                    this.send(pClientIP, pClientPort, vGateway.gibVerlaufListe());
                 } else {
                     this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
                 }
@@ -73,13 +75,19 @@ public class MServer extends Server {
                 String inhalt = gibTextbereich();
                 String name = "";
 
-                if(inhalt.isEmpty == false) {
+                if (inhalt.isEmpty == false) {
                     vGateway.neueNachricht(inhalt, name);
-                    //Muss hier noch eine Aufforderung an alle gesendet werden dass Nachricht gedruckt wird?
+                    // Muss hier noch eine Aufforderung an alle gesendet werden dass Nachricht
+                    // gedruckt wird?
                     this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
                 } else {
                     this.send(pClientIP, pClientPort, "E03 Nachricht leer");
                 }
+            }
+
+            case "QUT": {
+                this.send(pClientIP, pClientPort, "QUT erfolgreich");
+                processClosingConnection(pClientIP, pClientPort);
             }
         }
     }
@@ -88,7 +96,7 @@ public class MServer extends Server {
      * Diese Methode der Server-Klasse wird hiermit ueberschrieben.
      * Die Verbindung wird beendet und aus der Liste der Clients gestrichen.
      */
-    public void processClosingConnection(String pClientIP, int pClientPort){
+    public void processClosingConnection(String pClientIP, int pClientPort) {
         this.send(pClientIP, pClientPort, "QUT erfolgreich");
         this.closeConnection(pClientIP, pClientPort);
     }
@@ -96,8 +104,7 @@ public class MServer extends Server {
     /**
      * Main-Methode die den Server auf Port 1024 startet.
      */
-    public static void main(String [] args)
-    {
+    public static void main(String[] args) {
         MServer es = new MServer(2000);
     }
 
@@ -108,8 +115,7 @@ public class MServer extends Server {
      * 
      * @return Befehl
      */
-    private String gibBefehlsbereich(String message)
-    {
+    private String gibBefehlsbereich(String message) {
         return message.split(" ")[0];
     }
 
@@ -120,30 +126,30 @@ public class MServer extends Server {
      * 
      * @return Text
      */
-    private String gibTextbereich(String message)
-    {
-        String [] messageArray = message.split(" ");
+    private String gibTextbereich(String message) {
+        String[] messageArray = message.split(" ");
         String text = "";
-        for(int i = 1; i < messageArray.length; i++)
-        {
-            text = text+" "+ messageArray[i];
+        for (int i = 1; i < messageArray.length; i++) {
+            text = text + " " + messageArray[i];
         }
         return text;
     }
 
     /**
      * Gibt das Wort an der übergebenen Stelle.
+     * 
      * @param message
      * @param stelle
      * @return ergebnis welches Wort an der Stelle steht
      */
-    private String wortAn(String message, int stelle){
+    private String wortAn(String message, int stelle) {
         String ergebnis = "";
         return ergebnis;
     }
-    
+
     /**
      * Diese Methode holt den Nachrichtenverlauf aus der Datenbank.
+     * 
      * @author
      * @return ergebnis mit Nachrichtenverlauf
      * @version 04.06.24
@@ -152,19 +158,21 @@ public class MServer extends Server {
         List<Nachricht> ergebnis = vGateway.gibVerlaufListe();
         return ergebnis;
     }
-    
+
     /**
-     * Diese Methode schaut in der DB ob dieser Benutzername schon einmal angemeldet war.
+     * Diese Methode schaut in der DB ob dieser Benutzername schon einmal angemeldet
+     * war.
+     * 
      * @author
      * @param name der Benutzername
-     * return boolean ob er schon existiert
+     *             return boolean ob er schon existiert
      * @version 04.06.24
      */
     public boolean existiertBenutzer(String name) {
         List<Benutzer> liste = bGateway.gibBenutzerListe();
 
         liste.toFirst();
-        while(liste.hasAccess()) {
+        while (liste.hasAccess()) {
             if (liste.getContent().gibName().equals(name)) {
                 return true;
             } else {
@@ -173,20 +181,22 @@ public class MServer extends Server {
         }
         return false;
     }
-    
+
     /**
-     * Diese Methode schaut in der DB ob das Passort von diesem Benutzername richtig ist.
+     * Diese Methode schaut in der DB ob das Passort von diesem Benutzername richtig
+     * ist.
+     * 
      * @author
-     * @param name der Benutzername
+     * @param name     der Benutzername
      * @param passwort das Passwort
-     * return boolean ob es richtig ist
+     *                 return boolean ob es richtig ist
      * @version 04.06.24
      */
     public boolean hatBenutzerRichtigesPasswort(String name, String passwort) {
         List<Benutzer> liste = bGateway.gibBenutzerListe();
 
         liste.toFirst();
-        while(liste.hasAccess()) {
+        while (liste.hasAccess()) {
             if (liste.getContent().gibName().equals(name)) {
                 if (liste.getContent().gibPasswort().equals(passwort)) {
                     return true;
@@ -197,11 +207,12 @@ public class MServer extends Server {
         }
         return false;
     }
-    
+
     /**
      * Diese Methode legt einen neuen Benutzer in der DB an.
+     * 
      * @author
-     * @param name der Benutzername
+     * @param name     der Benutzername
      * @param passwort das Passwort
      * @version 04.06.24
      */
