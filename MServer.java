@@ -44,15 +44,15 @@ public class MServer extends Server {
                 
                 if(existiertBenutzer(name)) {
                     if(hatBenutzerRichtigesPasswort(name, passwort)) {
-                        system.out.println("USR willkommen");
-                        return vGateway.gibVerlaufListe();
+                        system.out.println(pClientIP, pClientPort, "USR willkommen");
+                        this.send(pClientIP, pClientPort, vGateway.gibVerlaufListe());
                     }
                     else {
-                        system.out.println("E01 falsche Anmeldedaten");
+                        this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
                     }
                 }
                 else {
-                        system.out.println("E01 falsche Anmeldedaten");
+                        this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
                     }
             }
 
@@ -62,10 +62,10 @@ public class MServer extends Server {
 
                 if(existiertBenutzer(name) == false) {
                     neuerBenutzer(name, passwort);
-                system.out.println("REG erfolgreich");
-                return vGateway.gibVerlaufListe();
+                this.send(pClientIP, pClientPort, "REG erfolgreich");
+                this.send(pClientIP, pClientPort, vGateway.gibVerlaufListe());
                 } else {
-                    system.out.println("E02 Benutzername schon vorhanden");
+                    this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
                 }
             }
 
@@ -74,10 +74,10 @@ public class MServer extends Server {
                 String name = "";
 
                 if(inhalt.isEmpty == false) {
-                    sytsem.out.println("MES Nachricht erhalten");
+                    this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
                     vGateway.neueNachricht(inhalt, name);
                 } else {
-                    sytsem.out.println("E03 Nachricht leer");
+                    this.send(pClientIP, pClientPort, "E03 Nachricht leer");
                 }
             }
         }
