@@ -75,6 +75,7 @@ public class MServer extends Server {
 
                 if(inhalt.isEmpty == false) {
                     vGateway.neueNachricht(inhalt, name);
+                    //Muss hier noch eine Aufforderung an alle gesendet werden dass Nachricht gedruckt wird?
                     this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
                 } else {
                     this.send(pClientIP, pClientPort, "E03 Nachricht leer");
