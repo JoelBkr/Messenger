@@ -1,12 +1,13 @@
-
+ 
 /**
- * @author 
- * @version 
- */
-public class Verschluesselung
+* @author 
+* @version 
+*/
+public class Caeser implements Kryptomodul
 {
     List<String> alph;
-    public Verschluesselung()
+    
+    public Caeser()
     {
         alph = new List<String>();
         String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -40,7 +41,7 @@ public class Verschluesselung
         }
         return vText;
     }
-
+ 
     public String entschluesseln(String gText, int schluessel)
     {
         String eText = new String();
@@ -66,5 +67,6 @@ public class Verschluesselung
         }
         return eText;
     }
-
+ 
 }
+
