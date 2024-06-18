@@ -71,11 +71,12 @@ public class MServer extends Server {
                 }
             }
 
-            case "MES": {
+            case "MES":
+                {
                 String inhalt = gibTextbereich();
                 String name = "";
 
-                if (inhalt.isEmpty == false) {
+                if (inhalt.isEmpty() == false) {
                     vGateway.neueNachricht(inhalt, name);
                     this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
                 } else {

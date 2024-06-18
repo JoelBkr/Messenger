@@ -1,13 +1,15 @@
-
+ 
 /**
- * @author 
- * @version 
- */
-public class Verschluesselung
+* @author 
+* @version 
+*/
+public class Caeser implements Kryptomodul
 {
     List<String> alph;
-    public Verschluesselung()
+    int key;
+    public Caeser(int key)
     {
+        this.key = key;
         alph = new List<String>();
         String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0;i<a.length();i++)
@@ -15,10 +17,10 @@ public class Verschluesselung
             alph.append(String.valueOf(a.charAt(i)));
         }
     }
-    public String verschluesseln(String kText, int schluessel)
+    public String verschluesseln(String kText)
     {
         String vText = new String();
-        kText.toUpperCase();
+        int schluessel = loadKey();
         for(int i = 0;i<kText.length();i++)
         {
             char akt = kText.charAt(i);
@@ -41,14 +43,15 @@ public class Verschluesselung
         }
         return vText;
     }
-
-    public String entschluesseln(String gText, int schluessel)
+ 
+    public String entschluesseln(String gText)
     {
         String eText = new String();
-        gText.toUpperCase();
+        int schluessel = loadKey();
         for(int i = 0;i<gText.length();i++)
         {
             char akt = gText.charAt(i);
+            
             
             alph.toFirst();
             while(!alph.getContent().equals(String.valueOf(akt)))
@@ -67,5 +70,14 @@ public class Verschluesselung
         }
         return eText;
     }
-
+    public void saveKey()
+    {
+        
+    }
+    public int loadKey()
+    {
+        return key;
+    }
+ 
 }
+
