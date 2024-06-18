@@ -2,7 +2,7 @@ import java.net.*;
 
 /**
  * Klasse fuer einen SpielServer. Der Spielserver bietet die Moeglickeit ein
- * Spiel gegen den Server zu spielen. Bei dem Spiel muss man eine zuf�llige Zahl
+ * Spiel gegen den Server zu spielen. Bei dem Spiel muss man eine zufaellige Zahl
  * zwischen
  * 
  * @author Henning Ainoedhofer
@@ -106,13 +106,16 @@ public class MServer extends Server {
         this.send(pClientIP, pClientPort, "QUT erfolgreich");
         this.closeConnection(pClientIP, pClientPort);
     }
+    /*
 
     /**
      * Main-Methode die den Server auf Port 1024 startet.
      */
+    /*
     public static void main(String[] args) {
         MServer es = new MServer(2000);
     }
+    */
 
     /**
      * Diese Methode gibt den Befehl zurueck die die message beinhaltet

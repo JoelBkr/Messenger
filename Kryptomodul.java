@@ -5,11 +5,11 @@
  
 public interface Kryptomodul
 {
-    public String verschluesseln(String klartext);
+    public void verschluesseln(String klartext);
     
-    public String entschluesseln(String geheimtext);
+    public void entschluesseln(String geheimtext);
     
-    public int loadKey();
+    public void loadKey();
     
     public void saveKey();
 }

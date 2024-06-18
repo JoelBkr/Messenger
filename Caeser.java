@@ -1,8 +1,4 @@
- 
-/**
-* @author 
-* @version 
-*/
+/*
 public class Caeser implements Kryptomodul
 {
     List<String> alph;
@@ -80,4 +76,4 @@ public class Caeser implements Kryptomodul
     }
  
 }
-
+*/

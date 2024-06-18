@@ -1,7 +1,9 @@
+/*
 public class VigenereVerschluesselung implements Kryptomodul {
+    String key;
 
     // Methode zum Verschlüsseln eines Klartextes mit einem Schlüssel
-    public static String verschluesseln(String klartext, String schluessel) {
+    public String verschluesseln(String klartext, String schluessel) {
         StringBuilder verschluesselt = new StringBuilder();
         schluessel = schluessel.toUpperCase();
         klartext = klartext.toUpperCase();
@@ -21,7 +23,7 @@ public class VigenereVerschluesselung implements Kryptomodul {
     }
 
     // Methode zum Entschlüsseln eines verschlüsselten Textes mit einem Schlüssel
-    public static String entschluesseln(String verschluesselterText, String schluessel) {
+    public String entschluesseln(String verschluesselterText, String schluessel) {
         StringBuilder entschluesselt = new StringBuilder();
         schluessel = schluessel.toUpperCase();
         verschluesselterText = verschluesselterText.toUpperCase();
@@ -40,17 +42,10 @@ public class VigenereVerschluesselung implements Kryptomodul {
         return entschluesselt.toString();
     }
 
-    // Hauptmethode zum Testen
-    public static void main(String[] args) {
-        String klartext = "HALLO, WELT!";
-        String schluessel = "SCHLUESSEL";
-
-        String verschluesselt = verschluesseln(klartext, schluessel);
-        String entschluesselt = entschluesseln(verschluesselt, schluessel);
-
-        System.out.println("Klartext: " + klartext);
-        System.out.println("Schlüssel: " + schluessel);
-        System.out.println("Verschlüsselt: " + verschluesselt);
-        System.out.println("Entschlüsselt: " + entschluesselt);
+    public void loadKey()
+    {
+        key = 
+    }
     }
 }
+*/
