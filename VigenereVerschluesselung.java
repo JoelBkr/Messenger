@@ -1,5 +1,5 @@
-/*
-public class VigenereVerschluesselung implements Kryptomodul {
+
+public abstract class VigenereVerschluesselung implements Kryptomodul {
     String key;
 
     // Methode zum Verschlüsseln eines Klartextes mit einem Schlüssel
@@ -21,7 +21,8 @@ public class VigenereVerschluesselung implements Kryptomodul {
         }
         return verschluesselt.toString();
     }
-
+}
+/*
     // Methode zum Entschlüsseln eines verschlüsselten Textes mit einem Schlüssel
     public String entschluesseln(String verschluesselterText, String schluessel) {
         StringBuilder entschluesselt = new StringBuilder();
