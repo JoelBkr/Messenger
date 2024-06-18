@@ -36,6 +36,18 @@ public class VerlaufGateway
         beende();
         return n;
     }
+    
+    public String gibStringVerlaufListe()
+    {
+        List <Nachricht> liste = gibVerlaufListe();
+        String erg = new String();
+        liste.toFirst();
+        while (liste.hasAccess()) {
+            erg = erg + liste.getContent();
+            erg = erg + ":";
+        }
+        return erg;
+    }
 
     /**
      * Diese Methode fügt eine neue Nachricht dem Verlauf hinzu

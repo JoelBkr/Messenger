@@ -40,7 +40,7 @@ public class MServer extends Server {
      * wurde.
      */
     public void processMessage(String pClientIP, int pClientPort, String pMessage) {
-
+        String inhalt = "";
         switch (wortAn(pMessage, 0)) {
             case "USR": {
                 String name = wortAn(pMessage, 1);
@@ -48,8 +48,8 @@ public class MServer extends Server {
 
                 if (existiertBenutzer(name)) {
                     if (hatBenutzerRichtigesPasswort(name, passwort)) {
-                        system.out.println(pClientIP, pClientPort, "USR willkommen");
-                        this.send(pClientIP, pClientPort, vGateway.gibVerlaufListe());
+                        this.send(pClientIP, pClientPort, "USR willkommen");
+                        this.send(pClientIP, pClientPort, vGateway.gibStringVerlaufListe());
                     } else {
                         this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
                     }
@@ -58,14 +58,15 @@ public class MServer extends Server {
                 }
             }
 
-            case "REG": {
+            case "REG": 
+                {
                 String name = wortAn(pMessage, 1);
                 String passwort = wortAn(pMessage, 2);
 
                 if (existiertBenutzer(name) == false) {
                     neuerBenutzer(name, passwort);
                     this.send(pClientIP, pClientPort, "REG erfolgreich");
-                    this.send(pClientIP, pClientPort, vGateway.gibVerlaufListe());
+                    this.send(pClientIP, pClientPort, vGateway.gibStringVerlaufListe());
                 } else {
                     this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
                 }
@@ -73,7 +74,7 @@ public class MServer extends Server {
 
             case "MES":
                 {
-                String inhalt = gibTextbereich();
+                inhalt = gibTextbereich(pMessage);
                 String name = "";
 
                 if (inhalt.isEmpty() == false) {
@@ -84,11 +85,13 @@ public class MServer extends Server {
                 }
             }
 
-            case "SND": {
+            case "SND": 
+                {
                 this.sendToAll(inhalt);
             }
 
-            case "QUT": {
+            case "QUT": 
+                {
                 this.send(pClientIP, pClientPort, "QUT erfolgreich");
                 processClosingConnection(pClientIP, pClientPort);
             }
