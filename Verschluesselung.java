@@ -18,6 +18,7 @@ public class Verschluesselung
     public String verschluesseln(String kText, int schluessel)
     {
         String vText = new String();
+        kText.toUpperCase();
         for(int i = 0;i<kText.length();i++)
         {
             char akt = kText.charAt(i);
@@ -44,10 +45,10 @@ public class Verschluesselung
     public String entschluesseln(String gText, int schluessel)
     {
         String eText = new String();
+        gText.toUpperCase();
         for(int i = 0;i<gText.length();i++)
         {
             char akt = gText.charAt(i);
-            
             
             alph.toFirst();
             while(!alph.getContent().equals(String.valueOf(akt)))
