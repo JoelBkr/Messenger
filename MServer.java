@@ -32,7 +32,7 @@ public class MServer extends Server {
      */
 
     public void processNewConnection(String pClientIP, int pClientPort) {
-        this.send(pClientIP, pClientPort, "CON erfolgreich");
+        this.send(pClientIP, pClientPort, "CON verbunden");
     }
 
     /**
@@ -70,8 +70,9 @@ public class MServer extends Server {
                     } else {
                         //this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
 
-                        break;
+                       
                     }
+                     break;
 
                 }
             case "MES":
@@ -103,6 +104,7 @@ public class MServer extends Server {
             default:
                 {
                     this.send(pClientIP, pClientPort, "E04 " + pMessage);
+                    break;
                 }
         }
     }
