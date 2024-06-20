@@ -16,6 +16,7 @@ public class MClient extends Client {
      * Diese Methode der Server-Klasse wird hiermit ueberschrieben.
      * Der Client gibt die erhaltende Meldung, auf dem Textfeld aus.
      */
+    
 
     public void processMessage(String message){
         switch(gibBefehlsbereich(message))
