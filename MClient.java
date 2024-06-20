@@ -19,46 +19,61 @@ public class MClient extends Client {
     
 
     public void processMessage(String message){
+        System.out.println(message);
         switch(gibBefehlsbereich(message))
         {
             case "CON":
                 {
-                    System.out.println(gibTextbereich(message));
+                    System.out.println(wortAn(message, 1));
+                    break;
                 }
             case "USR":
                 {
                     System.out.println(wortAn(message, 1));
                     druckeVerlauf(wortAn(message, 2));
+                    break;
                 }
             case "E01":
                 {
                      System.out.println(gibTextbereich(message));
+                     break;
                 }
             case "REG":
                 {
-                    System.out.println(wortAn(message, 1));
-                    druckeVerlauf(wortAn(message, 2));
+                    System.out.println(gibTextbereich(message));
+                    //druckeVerlauf(wortAn(message, 2));
+                    break;
                 }
             case "E02":
                 {
                     System.out.println(gibTextbereich(message));
+                    break;
                 }
             case "MES":
                 {
                     System.out.println(gibTextbereich(message));
+                    break;
                 }
             case "E03":
                 {
                     System.out.println(gibTextbereich(message));
+                    break;
                 }
             case "SND":
                 {
                     System.out.println(gibTextbereich(message));
+                    break;
                 }    
             case "QUT":
                 {
                     System.out.println(gibTextbereich(message));
-                }        
+                    break;
+                } 
+            default:
+                {
+                    System.out.println(message);
+                    break;
+                }
                 
         }
         
@@ -102,6 +117,7 @@ public class MClient extends Client {
         String ergebnis = message.split(" ")[stelle];
         return ergebnis;
     }
+    
     /**
      * Diese Methode druckt den Nachrichtenverlauf aus
      * 

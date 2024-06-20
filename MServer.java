@@ -41,7 +41,7 @@ public class MServer extends Server {
      */
     public void processMessage(String pClientIP, int pClientPort, String pMessage) {
         String inhalt = "";
-        switch (wortAn(pMessage, 0)) {
+        switch (gibBefehlsbereich(pMessage)) {
             case "USR": {
                 String name = wortAn(pMessage, 1);
                 String passwort = wortAn(pMessage, 2);
@@ -56,20 +56,21 @@ public class MServer extends Server {
                 } else {
                     this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
                 }
+                break;
             }
 
             case "REG": 
                 {
-                String name = wortAn(pMessage, 1);
-                String passwort = wortAn(pMessage, 2);
-
-                if (existiertBenutzer(name) == false) {
-                    neuerBenutzer(name, passwort);
-                    this.send(pClientIP, pClientPort, "REG erfolgreich");
-                    this.send(pClientIP, pClientPort, vGateway.gibStringVerlaufListe());
-                } else {
-                    this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
-                }
+                //String name = wortAn(pMessage, 1);
+                //String passwort = wortAn(pMessage, 2);
+                
+                //if (existiertBenutzer(name) == false) {
+                    //neuerBenutzer(name, passwort);
+                    this.send(pClientIP, pClientPort, "REG erfolgreich"); //+ vGateway.gibStringVerlaufListe());
+                //} else {
+                    //this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
+                
+                break;
             }
 
             case "MES":
@@ -83,17 +84,24 @@ public class MServer extends Server {
                 } else {
                     this.send(pClientIP, pClientPort, "E03 Nachricht leer");
                 }
+                break;
             }
 
             case "SND": 
                 {
                 this.sendToAll(inhalt);
+                break;
             }
 
             case "QUT": 
                 {
                 this.send(pClientIP, pClientPort, "QUT erfolgreich");
                 processClosingConnection(pClientIP, pClientPort);
+                break;
+            }
+            default:
+            {
+                this.send(pClientIP, pClientPort, pMessage);
             }
         }
     }

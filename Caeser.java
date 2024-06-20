@@ -1,5 +1,5 @@
-/*
-public class Caeser implements Kryptomodul
+
+public abstract class Caeser implements Kryptomodul
 {
     List<String> alph;
     int key;
@@ -13,6 +13,8 @@ public class Caeser implements Kryptomodul
             alph.append(String.valueOf(a.charAt(i)));
         }
     }
+}
+    /*
     public String verschluesseln(String kText)
     {
         String vText = new String();
