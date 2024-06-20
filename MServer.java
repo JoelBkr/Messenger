@@ -49,12 +49,12 @@ public class MServer extends Server {
                     if (existiertBenutzer(name)) {
                         if (hatBenutzerRichtigesPasswort(name, passwort)) {
                             this.send(pClientIP, pClientPort, "USR willkommen");
-                            this.send(pClientIP, pClientPort, vGateway.gibStringVerlaufListe());
+                            //this.send(pClientIP, pClientPort, vGateway.gibStringVerlaufListe());
                         } else {
-                            this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
+                            this.send(pClientIP, pClientPort, "E01 falsches Passwort");
                         }
                     } else {
-                        this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
+                        this.send(pClientIP, pClientPort, "E01 Benutzer existiert nicht");
                     }
                     break;
                 }
@@ -66,14 +66,11 @@ public class MServer extends Server {
 
                     if (existiertBenutzer(name) == false) {
                         neuerBenutzer(name, passwort);
-                        this.send(pClientIP, pClientPort, "REG angelegt" + vGateway.gibStringVerlaufListe());
+                        this.send(pClientIP, pClientPort, "REG angelegt"); //+ vGateway.gibStringVerlaufListe());
                     } else {
                         this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
-
-                       
                     }
-                     break;
-
+                    break;
                 }
             case "MES":
                 {
@@ -162,8 +159,8 @@ public class MServer extends Server {
      * @param stelle
      * @return ergebnis welches Wort an der Stelle steht
      */
-    private String wortAn(String message, int stelle) {
-        String ergebnis = "";
+    public String wortAn(String message, int stelle) {
+         String ergebnis = message.split(" ")[stelle];
         return ergebnis;
     }
 

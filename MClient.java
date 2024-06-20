@@ -30,7 +30,7 @@ public class MClient extends Client {
             case "USR":
                 {
                     System.out.println(wortAn(message, 1));
-                    druckeVerlauf(wortAn(message, 2));
+                    //druckeVerlauf(wortAn(message, 2));
                     break;
                 }
             case "E01":
