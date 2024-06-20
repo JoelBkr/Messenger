@@ -52,7 +52,7 @@ public class BenutzerGateway
     public void neuerBenutzer(String name, String passwort)
     {
         verbinde();
-        db.executeStatement("INSERT INTO benutzer (name, passwort, status) VALUES ('"+name+"', '"+passwort+"', ");
+        db.executeStatement("INSERT INTO benutzer (name, passwort) VALUES ('"+name+"', '"+passwort+"')");
         beende();
     }
      /**
@@ -61,7 +61,7 @@ public class BenutzerGateway
     public void erzeugeTabelle()
     {
          verbinde();
-         db.executeStatement("Create table if not exists benutzer (name text PRIMARY KEY, passwort text, status boolean)");
+         db.executeStatement("Create table if not exists benutzer (name text PRIMARY KEY, passwort text)");
          beende();
     }
     
