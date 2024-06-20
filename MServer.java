@@ -65,10 +65,10 @@ public class MServer extends Server {
                     String passwort = wortAn(pMessage, 2);
 
                     if (existiertBenutzer(name) == false) {
-                        //neuerBenutzer(name, passwort);
-                        this.send(pClientIP, pClientPort, "REG angelegt"); //+ vGateway.gibStringVerlaufListe());
+                        neuerBenutzer(name, passwort);
+                        this.send(pClientIP, pClientPort, "REG angelegt" + vGateway.gibStringVerlaufListe());
                     } else {
-                        //this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
+                        this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
 
                        
                     }
@@ -116,7 +116,6 @@ public class MServer extends Server {
          */
         public void processClosingConnection(String pClientIP, int pClientPort)
         {
-        this.send(pClientIP, pClientPort, "QUT erfolgreich");
         this.closeConnection(pClientIP, pClientPort);
     }
     /*
@@ -178,6 +177,11 @@ public class MServer extends Server {
      */
     public List<Nachricht> holeNachrichtenAusDB() {
         List<Nachricht> ergebnis = vGateway.gibVerlaufListe();
+        return ergebnis;
+    }
+    public List<Benutzer> holeBenutzerAusDB()
+    {
+        List<Benutzer> ergebnis = bGateway.gibBenutzerListe();
         return ergebnis;
     }
 
