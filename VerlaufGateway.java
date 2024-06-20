@@ -11,6 +11,7 @@ public class VerlaufGateway
     public VerlaufGateway()
     {
         db = null;
+        List nList = new List<Nachricht>();
 
     }
 
@@ -59,7 +60,6 @@ public class VerlaufGateway
     public void neueNachricht(String nachricht, String name)
     {
         Nachricht neu = new Nachricht(nachricht, name);
-        nList.append(neu);
         verbinde();
         db.executeStatement("INSERT INTO verlauf (inhalt, name) VALUES ('"+nachricht+"', '"+name+"'");
         beende();

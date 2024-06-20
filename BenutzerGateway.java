@@ -36,7 +36,7 @@ public class BenutzerGateway
         {
             for(int i = 0; i < ergebnis.getRowCount(); i++)
             {
-                b.append(new Benutzer(ergebnis.getData()[i][0], ergebnis.getData()[i][1], true));
+                b.append(new Benutzer(ergebnis.getData()[i][0], ergebnis.getData()[i][1]));
             }
         }
         beende();

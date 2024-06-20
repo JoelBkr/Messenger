@@ -43,74 +43,76 @@ public class MServer extends Server {
         String inhalt = "";
         switch (gibBefehlsbereich(pMessage)) {
             case "USR": {
-                String name = wortAn(pMessage, 1);
-                String passwort = wortAn(pMessage, 2);
+                    String name = wortAn(pMessage, 1);
+                    String passwort = wortAn(pMessage, 2);
 
-                if (existiertBenutzer(name)) {
-                    if (hatBenutzerRichtigesPasswort(name, passwort)) {
-                        this.send(pClientIP, pClientPort, "USR willkommen");
-                        this.send(pClientIP, pClientPort, vGateway.gibStringVerlaufListe());
+                    if (existiertBenutzer(name)) {
+                        if (hatBenutzerRichtigesPasswort(name, passwort)) {
+                            this.send(pClientIP, pClientPort, "USR willkommen");
+                            this.send(pClientIP, pClientPort, vGateway.gibStringVerlaufListe());
+                        } else {
+                            this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
+                        }
                     } else {
                         this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
                     }
-                } else {
-                    this.send(pClientIP, pClientPort, "E01 falsche Anmeldedaten");
+                    break;
                 }
-                break;
-            }
 
             case "REG": 
                 {
-                //String name = wortAn(pMessage, 1);
-                //String passwort = wortAn(pMessage, 2);
-                
-                //if (existiertBenutzer(name) == false) {
-                    //neuerBenutzer(name, passwort);
-                    this.send(pClientIP, pClientPort, "REG erfolgreich"); //+ vGateway.gibStringVerlaufListe());
-                //} else {
-                    //this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
-                
-                break;
-            }
+                    String name = wortAn(pMessage, 1);
+                    String passwort = wortAn(pMessage, 2);
 
+                    if (existiertBenutzer(name) == false) {
+                        //neuerBenutzer(name, passwort);
+                        this.send(pClientIP, pClientPort, "REG angelegt"); //+ vGateway.gibStringVerlaufListe());
+                    } else {
+                        //this.send(pClientIP, pClientPort, "E02 Benutzername schon vorhanden");
+
+                        break;
+                    }
+
+                }
             case "MES":
                 {
-                inhalt = gibTextbereich(pMessage);
-                String name = "";
+                    inhalt = gibTextbereich(pMessage);
+                    String name = "";
 
-                if (inhalt.isEmpty() == false) {
-                    vGateway.neueNachricht(inhalt, name);
-                    this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
-                } else {
-                    this.send(pClientIP, pClientPort, "E03 Nachricht leer");
+                    if (inhalt.isEmpty() == false) {
+                        vGateway.neueNachricht(inhalt, name);
+                        this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
+                    } else {
+                        this.send(pClientIP, pClientPort, "E03 Nachricht leer");
+                    }
+                    break;
                 }
-                break;
-            }
 
             case "SND": 
                 {
-                this.sendToAll(inhalt);
-                break;
-            }
+                    this.sendToAll(inhalt);
+                    break;
+                }
 
             case "QUT": 
                 {
-                this.send(pClientIP, pClientPort, "QUT erfolgreich");
-                processClosingConnection(pClientIP, pClientPort);
-                break;
-            }
+                    this.send(pClientIP, pClientPort, "QUT abgemeldet");
+                    processClosingConnection(pClientIP, pClientPort);
+                    break;
+                }
             default:
-            {
-                this.send(pClientIP, pClientPort, pMessage);
-            }
+                {
+                    this.send(pClientIP, pClientPort, "E04 " + pMessage);
+                }
         }
     }
 
-    /**
-     * Diese Methode der Server-Klasse wird hiermit ueberschrieben.
-     * Die Verbindung wird beendet und aus der Liste der Clients gestrichen.
-     */
-    public void processClosingConnection(String pClientIP, int pClientPort) {
+        /**
+         * Diese Methode der Server-Klasse wird hiermit ueberschrieben.
+         * Die Verbindung wird beendet und aus der Liste der Clients gestrichen.
+         */
+        public void processClosingConnection(String pClientIP, int pClientPort)
+        {
         this.send(pClientIP, pClientPort, "QUT erfolgreich");
         this.closeConnection(pClientIP, pClientPort);
     }
@@ -121,9 +123,9 @@ public class MServer extends Server {
      */
     /*
     public static void main(String[] args) {
-        MServer es = new MServer(2000);
+    MServer es = new MServer(2000);
     }
-    */
+     */
 
     /**
      * Diese Methode gibt den Befehl zurueck die die message beinhaltet

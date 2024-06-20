@@ -19,7 +19,7 @@ public class MClient extends Client {
     
 
     public void processMessage(String message){
-        System.out.println(message);
+        //System.out.println(message);
         switch(gibBefehlsbereich(message))
         {
             case "CON":
@@ -55,6 +55,11 @@ public class MClient extends Client {
                     break;
                 }
             case "E03":
+                {
+                    System.out.println(gibTextbereich(message));
+                    break;
+                }
+            case "E04":
                 {
                     System.out.println(gibTextbereich(message));
                     break;

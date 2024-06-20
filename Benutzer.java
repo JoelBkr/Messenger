@@ -9,17 +9,15 @@ public class Benutzer
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private String name, passwort;
-    private boolean angemeldet;
     private int bID;
 
     /**
      * Konstruktor fuer Objekte der Klasse benutzer
      */
-    public Benutzer(String name, String passwort, boolean angemeldet)
+    public Benutzer(String name, String passwort)
     {
         this.name = name;
         this.passwort = passwort;
-        this.angemeldet = angemeldet;
         this.bID = bID;
     }
 
@@ -46,17 +44,6 @@ public class Benutzer
         return passwort;
     }
     /**
-     * Diese Methode gibt zurück, ob ein Benutzer angemeldet ist
-     * 
-     * @author:
-     * @version: 04.06.2024
-     * @return: Online-Status
-     */
-    public boolean gibAngemeldet()
-    {
-        return angemeldet;
-    }
-    /**
      * Diese Methode verändert den Namen eines Benutzers
      * 
      * @author:
@@ -78,15 +65,6 @@ public class Benutzer
     {
         this.passwort = passwort;
     }
-    /**
-     * Diese Methode verändert den Online Status eines Benutzers
-     * @author:
-     * @version: 04.06.2024
-     * @param: Neuer Online-Status
-     */
-    public void setzeAngemeldet(boolean angemeldet)
-    {
-        this.angemeldet = angemeldet;
-    }
+   
 
 }
