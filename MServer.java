@@ -80,6 +80,7 @@ public class MServer extends Server {
                     if (inhalt.isEmpty() == false) {
                         vGateway.neueNachricht(inhalt, name);
                         this.send(pClientIP, pClientPort, "MES Nachricht erhalten");
+                        this.sendToAll(inhalt);
                     } else {
                         this.send(pClientIP, pClientPort, "E03 Nachricht leer");
                     }
